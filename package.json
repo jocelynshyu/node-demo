@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jocelynshyu/node-demo/issues"
   },
-  "homepage": "https://github.com/jocelynshyu/node-demo#readme"
+  "homepage": "https://github.com/jocelynshyu/node-demo#readme",
+  "dependencies": {
+    "x-ray": "^2.3.2"
+  }
 }
