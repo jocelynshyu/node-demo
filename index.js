@@ -1,5 +1,6 @@
 const Express = require('express');
 const helmet = require('helmet');
+const serveStatic = require('serve-static');
 
 const app = Express();
 
@@ -7,6 +8,7 @@ const app = Express();
 //   console.log('middleware');
 //   next();
 // });
+app.use(serveStatic('public'));
 app.use(helmet());
 
 app.get('/', (req, res) => {
