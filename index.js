@@ -1,3 +1,7 @@
+if ((process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
@@ -15,7 +19,6 @@ app.get('/', (req, res) => {
   res.send('Hello');
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(`listening port ${port}`);
 });
