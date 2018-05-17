@@ -1,0 +1,24 @@
+extends _layout.pug
+
+block content
+  .row
+    .col-md-8.blog-main
+      each post in posts
+        .blog-post
+          h3= post.title
+          - var date = new Date(post.createdAt).toLocaleString()
+          p.blog-post-meta= date
+          p= post.content
+
+    aside.col-md-4.blog-sidebar
+      .p-3.mb-3.bg-light.rounded
+        h4.font-italic.text-right New Post
+
+        form(action="/posts", method="POST")
+          .form-group
+            label(for='post-title') Title
+            input#post-title.form-control(name="title")
+          .form-group
+            label(for='post-content') Content
+            textarea#post-content.form-control(rows='3', name="content")
+          button.btn.btn-primary(type="submit") Publish

@@ -8,6 +8,8 @@ const { db, User, Post } = require('./models');
 
 const app = Express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.set('view engine', 'pug');
 
 // post
 app.get('/posts', async ({ query }, res) => {
@@ -34,7 +36,8 @@ app.get('/posts/:id', async ({ params: { id } }, res) => {
 
 app.post('/posts', async ({ body }, res) => {
   const post = await Post.create(body);
-  res.status(201).send(post);
+  // res.status(201).send(post);
+  res.redirect('/');
 });
 
 // app.put('/posts/:id', async ({ body, params: { id } }, res) => {
@@ -47,6 +50,13 @@ app.post('/posts', async ({ body }, res) => {
 app.delete('/posts/:id', async ({ params: { id } }, res) => {
   await Post.destroy({ where: { id } });
   res.status(204).end();
+});
+
+app.get('/', async (req, res) => {
+  const posts = await Post.findAll({
+    order: [[ 'createdAt', 'DESC' ]],
+  });
+  res.render('index', { posts });
 });
 
 db
